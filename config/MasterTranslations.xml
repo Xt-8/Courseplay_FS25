@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- 
+<!--
 	- All translation have to be defined here.
-	- The other languages will be set to english by default, 
+	- The other languages will be set to english by default,
 	  if there is no declaration.
 	- The category names will be added as a comment in the translation files.
 	
@@ -745,7 +745,7 @@
 			<Text language="de"><![CDATA[Höhenversatz der Schaufel für die Ladeposition. Wert: -1 - 1]]></Text>
 			<Text language="en"><![CDATA[Height offset for the shovel loading position. Value: -1 - 1]]></Text>
 		</Translation>
-	</Category> 
+	</Category>
 	<Category name="Vehicle settings speed">
 		<Translation name="CP_vehicle_setting_fieldWorkSpeed_title">
 			<Text language="de"><![CDATA[Feldarbeit]]></Text>
@@ -1152,6 +1152,14 @@
 		<Translation name="CP_vehicle_courseGeneratorSetting_useBaseLineEdge_tooltip">
 			<Text language="de"><![CDATA[Die Feldkante, die am nächsten am Feldmarker ist, wird verwendet, um den Verlauf der Bahnen zu bestimmen.]]></Text>
 			<Text language="en"><![CDATA[The rows follow the curvature of the field edge nearest to the field marker.]]></Text>
+		</Translation>
+		<Translation name="CP_vehicle_courseGeneratorSetting_extendRows_title">
+			<Text language="de"><![CDATA[DE EXTEND ROWS]]></Text>
+			<Text language="en"><![CDATA[Extend Rows]]></Text>
+		</Translation>
+		<Translation name="CP_vehicle_courseGeneratorSetting_extendRows_tooltip">
+			<Text language="de"><![CDATA[DE EXTEND ROWS.]]></Text>
+			<Text language="en"><![CDATA[Number of meters to extend the start and end of center rows.]]></Text>
 		</Translation>
 		<Translation name="CP_vehicle_courseGeneratorSetting_narrowField_title">
 			<Text language="de"><![CDATA[Schmales Feld]]></Text>
@@ -1635,7 +1643,7 @@ The course is saved automatically on closing of the editor and overrides the sel
 			<Text language="de"><![CDATA[Ein Wendepunkt darf nicht ausgewählt werden.]]></Text>
 			<Text language="en"><![CDATA[Selecting a turning point is not allowed.]]></Text>
 		</Translation>
-		<!-- 
+		<!--
 		<Translation name="CP_editor_course_changeAttributes_title">
 			<Text language="de"><![CDATA[Ändert Wegpunkt Attribute]]></Text>
 			<Text language="en"><![CDATA[Change waypoint attributes]]></Text>
@@ -1985,7 +1993,7 @@ Wenn es sich bei deinem Job um Feldarbeit handelt, bekommst du jetzt Zugriff auf
 ]]></Text>
 			<Text language="en"><![CDATA[
 When the field position is placed correctly on a field, you will see the field border drawn on the map.
-If you are creating a CP: Fieldwork job, you will gain access to the course generator settings. 
+If you are creating a CP: Fieldwork job, you will gain access to the course generator settings.
 ]]></Text>
 		</Translation>
 		<Translation name="CP_help_page_JobMenuExtras_text">
@@ -2246,7 +2254,7 @@ This feature also allows you to pick up the swath left behind by a combine or a 
 
 The save location for the course files is: ..\My Games\FarmingSimulator2025\modSettings\FS25_Courseplay\Courses\Mapname.SampleModMap (or for vanilla e.g. MapUS).
 The course manager works differently from what you are used to in FS19.
-Courses are saved into folders, which will be displayed on the left. This means you would need at least one folder to start saving courses into. 
+Courses are saved into folders, which will be displayed on the left. This means you would need at least one folder to start saving courses into.
 Folders can simply be created by the button at the bottom of the screen and entering a name.
 Courses are only saved locally for now.
 ]]></Text>
@@ -2293,7 +2301,7 @@ Einen Kurs oder Ordner zu löschen geht ähnlich einfach. Klicke auf den "Lösch
 Ordner müssen leer sein damit sie gelöscht werden können.
 ]]></Text>
 			<Text language="en"><![CDATA[
-For moving a course: 
+For moving a course:
   1) Click on the move button at the bottom of the screen.
   2) Click on the course you want to move.
   3) Click on the directory where you want the course moved to.
@@ -2786,7 +2794,7 @@ Die geladenen Kurse werden automatisch gespeichert/überschrieben, wenn der Edit
 
 1) Um einen Feldrand zu bearbeiten, muss dieser im Helfermenü ausgewählt sein und anschließend auf "Randkurs bearbeiten" geklickt werden.
 2) Um einen Kurs zu bearbeiten, muss dieser im Kursmanager ausgewählt sein und auf "Kurseditor öffnen" geklickt werden.
-   Dies klappt nur für gespeicherte Kurse und in dem aktuellen Fahrzeug darf kein Kurs geladen sein. 
+   Dies klappt nur für gespeicherte Kurse und in dem aktuellen Fahrzeug darf kein Kurs geladen sein.
 
 Eine Kurs sollte nur bearbeitet werden, wenn es der Generator nicht geschafft hat, diesen gut genug zu generieren.
 Eine falsche Bearbeitung kann zu unerwünschten Fahrverhalten führen, da Wegpunkte noch weitere, versteckte Eigenschaften haben.
@@ -2796,7 +2804,7 @@ The course editor can be used to edit courses and custom fields.
 The loaded courses will be saved/overwritten automatically, when the editor is closed.
 
 1) Editing a custom field can be done by selecting one on the ai menu page and clicking on edit custom field.
-2) Editing a course can be done in the course manager by selecting it and clicking on open course editor. 
+2) Editing a course can be done in the course manager by selecting it and clicking on open course editor.
    This only works with saved courses. Make sure no course is loaded in the vehicle.
 
 Editing of courses should only be done, when the course generator couldn't produce a good enough course.
@@ -2944,7 +2952,7 @@ Bei einigen Anhängern kann die Abladeseite zwischen "Hinten" und "Kornschieber"
 The unloading position can be selected with the unload marker.
 Unloading on the field must be activated.
 The position needs to be on the same field or near the field edge.
-If the marker points to an already existing heap, 
+If the marker points to an already existing heap,
 then this heap is used to unload to.
 The direction of the marker is used for the unload direction.
 With some trailers the tip side can be switched between the back and the grain door.
@@ -2973,7 +2981,7 @@ For wedge silos, a shield is used to push the chaff to the back of the silo.
 Für einen Verteiler oder Schild gibt es nur den Bunkersilo-Modus.
 Ohne Verteiler oder Schild wird durch das Durchschalten des Startpunkts zum Bunkersilo-Modus gewechselt.
 Ebenfalls kann die Fahrtrichtung, mit welcher in das Silo gefahren wird, angegeben werden.
-Mit dem Zielknopf im HUD wird auf der Helferkarte der Bunker ausgewählt. 
+Mit dem Zielknopf im HUD wird auf der Helferkarte der Bunker ausgewählt.
 Der ausgewählte Bunkerumriss auf der Karte wird dann weiß.
 Die Parkposition wird mit dem Marker "Parkposition" gesetzt und wird angefahren, wenn sich der Abfahrer nahe des Silos befinden.
 Die Parkposition kann auch genutzt werden, um mit dem Giants Helfer zum Bunker zu fahren, bevor mit der Arbeit begonnen wird.
@@ -3045,7 +3053,7 @@ Schaufeln mit Gebiss öffnen dieses automatisch beim Laden und Abladen und schli
 Die Schaufel zum Zerkleinern von Zuckerrüben wird mit allen Funktionen unterstützt.
 ]]></Text>
 			<Text language="en"><![CDATA[
-This mode enables the use of wheel loaders and tractors with a front loader. 
+This mode enables the use of wheel loaders and tractors with a front loader.
 With a shovel attached a heap can be picked up from the ground or loading from a bunker silo can be accomplished.
 The picked up fill level can be unloaded automatically into a nearby trailer or a selected unloading station like a BGA.
 The shovel will automatically be moved to the correct positions for loading, unloading and so on.
@@ -3055,7 +3063,7 @@ The target icon on the HUD can be used to open the AI map to select the loading 
 The HUD also shows the leftover fill level of the heap or silo, while the helper is working.
 If the loading target is a bunker silo, then the work width might need to be adjusted to avoid hitting the side walls of the silo.
 
-The height offset setting is used to adjust the height above the ground, as not all shovels can be calculated correctly. 
+The height offset setting is used to adjust the height above the ground, as not all shovels can be calculated correctly.
 This should be checked, if the shovel is too low for loading and the driver can't turn anymore or the shovel is too high and fill level is missed to the ground.
 If the value gets changed, the shovel will automatically move to the loading position to show the impact of the offset.
 To reset the offset you need to click on the settings text in the HUD. The value can be adjusted from +1 to -1 in 0.1 setps.

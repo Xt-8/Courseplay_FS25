@@ -34,10 +34,11 @@ function FieldworkContext:init(field, workingWidth, turningRadius, nHeadlands)
     self.rowWaypointDistance = CourseGenerator.cRowWaypointDistance
     self.evenRowDistribution = false
     self.useBaselineEdge = false
+    self.extendRows = 0
     self.enableSmallOverlapsWithHeadland = false
     self.logger = Logger('FieldworkContext', Logger.level.debug, CpDebug.DBG_COURSES)
     self.errors = {}
-    
+
     self.reverseCourse = false
     self.spiralFromInside = false
     -- multi vehicle support
@@ -187,6 +188,11 @@ end
 --- all rows follow that baseline.
 function FieldworkContext:setUseBaselineEdge(use)
     self.useBaselineEdge = use
+    return self
+end
+
+function FieldworkContext:setExtendRows(rows)
+    self.extendRows = rows
     return self
 end
 

@@ -87,20 +87,87 @@ end
 function Center:generate()
     -- first, we split the field into blocks. Simple convex fields have just one block only,
     -- but odd shaped, concave fields or fields with island may have more blocks
+    local blocks
     if self.useBaselineEdge then
         self.rows = CourseGenerator.CurvedPathHelper.generateCurvedUpDownRows(self.headlandPolygon, self.context.baselineEdge,
                 self.context:getCenterRowSpacing(), self.context.turningRadius, nil)
+        blocks = self:_splitIntoBlocks(self.rows, self.headland)
+        testBlcks = blocks
+
+        print("test")
+
+        if self.context.extendRows ~= 0 then
+            for j,block in ipairs(blocks) do
+                for i,row in ipairs(block.rows) do
+                    local extendStart = self.context.extendRows
+
+                    local function rowSegLen(rowP1, rowP2)
+                        return math.sqrt(math.abs(rowP2.x - rowP1.x) ^ 2 + math.abs(rowP2.y - rowP1.y) ^ 2)
+                    end
+
+                    if extendStart < 0 then
+                        local segLen = rowSegLen(row[1], row[2])
+
+                        while segLen < -extendStart do
+                            extendStart = extendStart + segLen
+                            table.remove(row, 1)
+
+                            segLen = rowSegLen(row[1], row[2])
+                        end
+                    end
+
+                    local dxStart = row[1].x - row[2].x
+                    local dyStart = row[1].y - row[2].y
+                    local angleStart = math.atan2(dyStart, dxStart)
+
+                    row[1].x = row[1].x + math.cos(angleStart) * extendStart
+                    row[1].y = row[1].y + math.sin(angleStart) * extendStart
+
+
+                    local extendEnd = self.context.extendRows
+                    if extendEnd < 0 then
+                        local segLen = rowSegLen(row[#row - 1], row[#row])
+
+                        while segLen < -extendEnd do
+                            extendEnd = extendEnd + segLen
+                            table.remove(row)
+
+                            segLen = rowSegLen(row[#row - 1], row[#row])
+                        end
+                    end
+
+                    local dxEnd = row[#row - 1].x - row[#row].x
+                    local dyEnd = row[#row - 1].y - row[#row].y
+                    local angleEnd = math.atan2(dyEnd, dxEnd)
+
+                    row[#row].x = row[#row].x - math.cos(angleEnd) * extendEnd
+                    row[#row].y = row[#row].y - math.sin(angleEnd) * extendEnd
+                end
+            end
+        end
     else
         local angle = self.context.autoRowAngle and self:_findBestRowAngle() or self.context.rowAngle
         self.rows = self:_generateStraightUpDownRows(angle)
+        blocks = self:_splitIntoBlocks(self.rows, self.headland)
+
+        for j,block in ipairs(blocks) do
+            for i,row in ipairs(block.rows) do
+                row[1].x = row[1].x - math.cos(angle) * self.context.extendRows
+                row[1].y = row[1].y - math.sin(angle) * self.context.extendRows
+
+                row[2].x = row[2].x + math.cos(angle) * self.context.extendRows
+                row[2].y = row[2].y + math.sin(angle) * self.context.extendRows
+            end
+        end
     end
-    local blocks = self:_splitIntoBlocks(self.rows, self.headland)
+    --local blocks = self:_splitIntoBlocks(self.rows, self.headland)
+
 
     if #blocks < 1 then
         self.logger:debug('No blocks could be generated')
         return
     end
-    
+
     if self.context:_generateBlocksOnly() then
         self.logger:debug('Generating blocks only, no sequencing or connecting paths.')
         self.blocks = blocks

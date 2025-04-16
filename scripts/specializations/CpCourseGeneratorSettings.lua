@@ -15,15 +15,15 @@ CpCourseGeneratorSettings.KEY = "." .. CpCourseGeneratorSettings.MOD_NAME .. CpC
 function CpCourseGeneratorSettings.initSpecialization()
 	local schema = Vehicle.xmlSchemaSavegame
     --- Old save format
-    CpSettingsUtil.registerXmlSchema(schema, 
+    CpSettingsUtil.registerXmlSchema(schema,
         "vehicles.vehicle(?)"..CpCourseGeneratorSettings.KEY.."(?)")
-    
+
     --- Normal course generator settings.
-    CpSettingsUtil.registerXmlSchema(schema, 
+    CpSettingsUtil.registerXmlSchema(schema,
         "vehicles.vehicle(?)"..CpCourseGeneratorSettings.KEY..CpCourseGeneratorSettings.SETTINGS_KEY.."(?)")
-    
+
     --- Vine course generator settings.
-    CpSettingsUtil.registerXmlSchema(schema, 
+    CpSettingsUtil.registerXmlSchema(schema,
         "vehicles.vehicle(?)"..CpCourseGeneratorSettings.KEY..CpCourseGeneratorSettings.VINE_SETTINGS_KEY.."(?)")
     CpCourseGeneratorSettings.loadSettingsSetup()
 
@@ -37,7 +37,7 @@ function CpCourseGeneratorSettings.register(typeManager,typeName,specializations
 end
 
 function CpCourseGeneratorSettings.prerequisitesPresent(specializations)
-    return SpecializationUtil.hasSpecialization(CpAIWorker, specializations) 
+    return SpecializationUtil.hasSpecialization(CpAIWorker, specializations)
 end
 
 function CpCourseGeneratorSettings.registerEvents(vehicleType)
@@ -93,11 +93,11 @@ function CpCourseGeneratorSettings:onLoad(savegame)
     self.spec_cpCourseGeneratorSettings = self["spec_" .. CpCourseGeneratorSettings.SPEC_NAME]
     local spec = self.spec_cpCourseGeneratorSettings
 
-    --- Clones the generic settings to create different settings containers for each vehicle. 
+    --- Clones the generic settings to create different settings containers for each vehicle.
     CpSettingsUtil.cloneSettingsTable(spec,CpCourseGeneratorSettings.settings,self,CpCourseGeneratorSettings)
 
     spec.vineSettings = {}
-    --- Clones the generic settings to create different settings containers for each vehicle. 
+    --- Clones the generic settings to create different settings containers for each vehicle.
     CpSettingsUtil.cloneSettingsTable(spec.vineSettings,CpCourseGeneratorSettings.vineSettings.settings,self,CpCourseGeneratorSettings)
 
     CpCourseGeneratorSettings.loadSettings(self,savegame)
@@ -111,7 +111,7 @@ end
 
 --- Resets the work width to a saved value after all implements are loaded and attached.
 function CpCourseGeneratorSettings:onUpdate(savegame)
-    if self.propertyState == VehiclePropertyState.SHOP_CONFIG then 
+    if self.propertyState == VehiclePropertyState.SHOP_CONFIG then
         return
     end
     local spec = self.spec_cpCourseGeneratorSettings
@@ -123,14 +123,14 @@ end
 
 function CpCourseGeneratorSettings:onReadStream(streamId, connection)
     local spec = self.spec_cpCourseGeneratorSettings
-    for i, setting in ipairs(spec.settings) do 
+    for i, setting in ipairs(spec.settings) do
         setting:readStream(streamId, connection)
     end
 end
 
 function CpCourseGeneratorSettings:onWriteStream(streamId, connection)
     local spec = self.spec_cpCourseGeneratorSettings
-    for i, setting in ipairs(spec.settings) do 
+    for i, setting in ipairs(spec.settings) do
         setting:writeStream(streamId, connection)
     end
 end
@@ -197,7 +197,7 @@ function CpCourseGeneratorSettings.loadSettingsSetup()
 end
 
 function CpCourseGeneratorSettings.getSettingSetup()
-    return CpCourseGeneratorSettings.settingsBySubTitle, 
+    return CpCourseGeneratorSettings.settingsBySubTitle,
         CpCourseGeneratorSettings.pageTitle
 end
 
@@ -220,11 +220,11 @@ function CpCourseGeneratorSettings:loadSettings(savegame)
     end)
 
     --- Loads the normal course generator settings.
-    CpSettingsUtil.loadFromXmlFile(spec, savegame.xmlFile, 
+    CpSettingsUtil.loadFromXmlFile(spec, savegame.xmlFile,
                         savegame.key .. CpCourseGeneratorSettings.KEY ..  CpCourseGeneratorSettings.SETTINGS_KEY, self)
 
     --- Loads the vine course generator settings.
-    CpSettingsUtil.loadFromXmlFile(spec.vineSettings, savegame.xmlFile, 
+    CpSettingsUtil.loadFromXmlFile(spec.vineSettings, savegame.xmlFile,
                         savegame.key .. CpCourseGeneratorSettings.KEY .. CpCourseGeneratorSettings.VINE_SETTINGS_KEY, self)
 end
 
@@ -232,11 +232,11 @@ function CpCourseGeneratorSettings:saveToXMLFile(xmlFile, baseKey, usedModNames)
     local spec = self.spec_cpCourseGeneratorSettings
 
     --- Saves the normal course generator settings.
-    CpSettingsUtil.saveToXmlFile(spec.settings, xmlFile, 
+    CpSettingsUtil.saveToXmlFile(spec.settings, xmlFile,
     baseKey .. CpCourseGeneratorSettings.SETTINGS_KEY, self, nil)
 
     --- Saves the vine course generator settings.
-    CpSettingsUtil.saveToXmlFile(spec.vineSettings.settings, xmlFile, 
+    CpSettingsUtil.saveToXmlFile(spec.vineSettings.settings, xmlFile,
     baseKey .. CpCourseGeneratorSettings.VINE_SETTINGS_KEY, self, nil)
 
 end
@@ -250,24 +250,24 @@ end
 
 function CpCourseGeneratorSettings:raiseDirtyFlag(setting)
     CourseGeneratorSettingsEvent.sendEvent(self, setting)
-end 
+end
 
 function CpCourseGeneratorSettings:validateSettings()
     local spec = self.spec_cpCourseGeneratorSettings
-    for i,setting in ipairs(spec.settings) do 
+    for i,setting in ipairs(spec.settings) do
         setting:refresh()
     end
-    for i,setting in ipairs(spec.vineSettings.settings) do 
+    for i,setting in ipairs(spec.vineSettings.settings) do
         setting:refresh()
     end
 end
 
 function CpCourseGeneratorSettings:onCpUnitChanged()
     local spec = self.spec_cpCourseGeneratorSettings
-    for i,setting in ipairs(spec.settings) do 
+    for i,setting in ipairs(spec.settings) do
         setting:validateTexts()
     end
-    for i,setting in ipairs(spec.vineSettings.settings) do 
+    for i,setting in ipairs(spec.vineSettings.settings) do
         setting:validateTexts()
     end
 end
@@ -303,12 +303,12 @@ function CpCourseGeneratorSettings:isWorkWidthSettingVisible()
 end
 
 --- Generates speed setting values up to the max possible speed.
-function CpCourseGeneratorSettings:generateWorkWidthSettingValuesAndTexts(setting) 
+function CpCourseGeneratorSettings:generateWorkWidthSettingValuesAndTexts(setting)
     --- Disabled for now!!
     local workWidth = WorkWidthUtil.getAutomaticWorkWidthAndOffset(self)
     local maxWorkWidth = math.max(setting.data.max, workWidth + 5)
     local values, texts = {}, {}
-    for i = setting.data.min, maxWorkWidth, setting.data.incremental do 
+    for i = setting.data.min, maxWorkWidth, setting.data.incremental do
         table.insert(values, i)
         table.insert(texts, i)
     end
@@ -321,7 +321,7 @@ end
 
 function CpCourseGeneratorSettings.registerConsoleCommands()
     g_consoleCommands:registerConsoleCommand("cpSettingsPrintGenerator",
-        "Prints the course generator settings or a given setting", 
+        "Prints the course generator settings or a given setting",
         "consoleCommandPrintSetting", CpCourseGeneratorSettings)
 end
 
@@ -329,21 +329,21 @@ end
 ---@param name any
 function CpCourseGeneratorSettings:consoleCommandPrintSetting(name)
     local vehicle = CpUtil.getCurrentVehicle()
-    if not vehicle then 
+    if not vehicle then
         CpUtil.info("Not entered a valid vehicle!")
         return
     end
     local spec = vehicle.spec_cpCourseGeneratorSettings
-    if not spec then 
+    if not spec then
         CpUtil.infoVehicle(vehicle, "has no course generator settings!")
         return
     end
-    if name == nil then 
+    if name == nil then
         CpUtil.infoVehicle(vehicle,"%d Course generator settings printed", tostring(spec.settings))
         return
     end
     local num = tonumber(name)
-    if num then 
+    if num then
         CpUtil.infoVehicle(vehicle, tostring(spec.settings[num]))
         return
     end

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!-- 
+<!--
 	All the course generator settings can be setup here.
 	For documentation look up the CpSettingUtil.lua.
 -->
@@ -61,6 +61,7 @@
 		</Setting>
 		<Setting classType="AIParameterBooleanSetting" name="evenRowWidth" defaultBool="false"/>
 		<Setting classType="AIParameterBooleanSetting" name="useBaseLineEdge" defaultBool="false" isExpertModeOnly="true"/>
+        <Setting classType="AIParameterSettingList" name="extendRows" min="-10" max="10" default="0" isExpertModeOnly="true"/>
 		<Setting classType="AIParameterBooleanSetting" name="autoRowAngle" defaultBool="true">
 			<Texts>
 				<Text>manual</Text>
